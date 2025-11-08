@@ -32,7 +32,7 @@
             display: flex;
             align-items: center;
             padding-top: 80px;
-            padding-bottom: 4rem;
+            padding-bottom: 1rem;
         }
 
         .content-wrapper {
@@ -190,6 +190,34 @@
                 <a href="#section-cta" class="hidden md:inline-block bg-blue-600 text-white font-semibold py-2 px-5 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105">
                     참여하기
                 </a>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-900 hover:text-blue-600 focus:outline-none">
+                        <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 right-0 w-full bg-white shadow-lg z-40">
+            <div class="px-5 pt-2 pb-6 space-y-3">
+                <a href="#section-2" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">소개</a>
+                <a href="#section-topics" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">주제</a>
+                <a href="#section-how" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">방식</a>
+                <a href="#section-reward" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">리워드</a>
+                <a href="#section-community" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">커뮤니티</a>
+                <a href="#section-host" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">방장</a>
+                <a href="#section-faq" class="mobile-menu-link block py-2 text-lg font-medium text-gray-700 hover:text-blue-600">FAQ</a>
+                <hr class="my-4">
+                <a href="#section-cta" class="mobile-menu-link block w-full text-center bg-blue-600 text-white font-semibold py-3 px-5 rounded-full hover:bg-blue-700 transition-all">
+                    참여하기
+                </a>
             </div>
         </div>
     </header>
@@ -199,7 +227,7 @@
         <!-- [수정] 1번 섹션: 2단 레이아웃 및 텍스트 변경 -->
         <section class="scroll-section section-1" data-blur="bg-clear" data-index="1" id="section-1">
             <div class="content-wrapper grid md:grid-cols-2 items-center gap-12">
-                <div class="text-left">
+                <div class="text-center">
                     <h1 class="text-4xl md:text-5xl font-extrabold leading-tight animate-item">
                         가장 활발한 유저들의 <br> 커뮤니티, 만두방
                         
@@ -328,7 +356,7 @@
                     방장의 한마디
                 </h2>
                 <div class="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 animate-item-visual">
-                    <img src="https://placehold.co/100x100/EBF8FF/3B82F6?text=방장" alt="방장 프로필" class="w-24 h-24 rounded-full mx-auto -mt-20 mb-6 border-4 border-white">
+                    <img src="방장만두.png" alt="방장 프로필" class="w-24 h-24 rounded-full mx-auto -mt-20 mb-6 border-4 border-white">
                     <p class="text-xl md:text-2xl font-medium text-gray-800 leading-relaxed">
                         재미있게 소통하고 활동하는 만큼 정직하게 보상해드립니다. 즐겁게 참여해주시면 그 가치를 그대로 돌려드릴게요.
                     </p>
@@ -509,6 +537,32 @@
                 'rgba(147, 197, 253, 0.3)',
                 'rgba(239, 246, 255, 0.4)'
             ];
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    // 메뉴를 토글합니다
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    // 아이콘을 토글합니다
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+            }
+
+            // (중요) 모바일에서 링크 클릭 시 메뉴 닫기
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
 
             function createBubbles(containerId) {
                 const container = document.getElementById(containerId);
